@@ -1,3 +1,6 @@
+//This is 校园生活 v0.1beta.This version does not support English,and the 睡觉 part was not complete.
+//No part of this game shoud be copyed to post out
+//xiaochentimmy 2026/7/19/7:38
 #include <iostream>
 #include <algorithm>
 #include <cmath>
