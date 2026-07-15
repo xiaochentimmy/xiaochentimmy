@@ -1,16 +1,19 @@
 //This is 校园生活 v0.1beta.This version does not support English,and the 睡觉 part was not complete.
 //No part of this game shoud be copyed to post out
 //xiaochentimmy 2026/7/19/7:38
+//For WINDOWS
 #include <iostream>
 #include <algorithm>
 #include <cmath>
 #include <string>
 #include <cstdlib>
+#include <windows.h>
 using namespace std;
 long long in, enegry = 100, brain, magic, r, coin = 5;
 void cls ()
 {
-    for (int i = 1; i <= 100; i++) cout << "*\n";
+    // for (int i = 1; i <= 100; i++) cout << "*\n";
+    system("cls");
 }
 void have_class ()
 {
