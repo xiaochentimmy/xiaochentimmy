@@ -68,15 +68,34 @@ void menu ()
     cls();
     cout << "InDev_WarningUnstable\n";
     printf("体力%lld 智力%lld 魔力%lld 金币%lld\n", enegry, brain, magic, coin);
-    cout << "1.上课（消耗5点体力）\n2.吃饭（补充10点体力，消耗5金币）\n3.睡觉（回满体力）\n4.离校\n";
+    cout << "1.上课（消耗5点体力）\n2.吃饭（补充10点体力，消耗5金币）\n3.睡觉（回满体力）\n";
     cin >> in;
     if (in == 4)
     {
         cls();
         return;
     }
-    if (in == 1) have_class();
-    else if (in == 2) eat();
+    if (in == 1)
+    {
+        if (enegry < 5)
+        {
+            cout << "体力不足，无法上课\n按任意键继续...";
+            cin >> in;
+            return;
+        }
+        have_class();
+    }
+    else if (in == 2)
+    {
+        if (coin < 5)
+        {
+            cout << "你没钱了，吃不了饭\n按任意键继续...";
+            cin >> in;
+            return;
+        }
+        eat();
+        check();
+    }
 
     return;
 }
