@@ -1,19 +1,16 @@
-//This is 校园生活 v0.1beta.This version does not support English,and the 睡觉 part was not complete.
+//This is 校园生活 v0.2beta.This version does not support English,and the 睡觉 part was not complete.
 //No part of this game shoud be copyed to post out
-//xiaochentimmy 2026/7/19/7:38
+//xiaochentimmy 2026/7/19/18:02
 //For WINDOWS
 #include <iostream>
 #include <algorithm>
 #include <cmath>
 #include <string>
 #include <cstdlib>
+#include <time.h>
 #include <windows.h>
 using namespace std;
 long long in, enegry = 100, brain, magic, r, coin = 5;
-void cls ()
-{
-    system("cls");
-}
 void have_class ()
 {
     cout << "InDev_WarningUnstable\n";
@@ -70,16 +67,11 @@ void check ()
 }
 void menu ()
 {
-    cls();
     cout << "InDev_WarningUnstable\n";
     printf("体力%lld 智力%lld 魔力%lld 金币%lld\n", enegry, brain, magic, coin);
     cout << "1.上课（消耗5点体力）\n2.吃饭（补充10点体力，消耗5金币）\n3.睡觉（回满体力）\n";
     cin >> in;
-    if (in == 4)
-    {
-        cls();
-        return;
-    }
+    if (in == 4) return;
     if (in == 1)
     {
         if (enegry < 5)
@@ -101,18 +93,18 @@ void menu ()
         eat();
         check();
     }
-
+	system("cls");
     return;
 }
 int main ()
 {
     cout << "更多游戏，前往GitHub搜索xiaochentimmy\n按任意键继续...";
     cin >> in;
-    cls();
+    system("cls");
     cout << "InDev_WarningUnstable\n校园生活\n1.进入游戏\n2.退出\n";
     cin >> in;
+    system("cls");
     if (in == 2) return 0;
-    cls();
     while (1)
     {
         menu();
