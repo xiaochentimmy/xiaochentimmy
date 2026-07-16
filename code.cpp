@@ -1,6 +1,6 @@
-//This is 校园生活 v0.3.1beta.This version does not support English.
+//This is Campus Life v0.3.2beta.I add the English translate.If you found any grammer error(my grammer is bad),please tell me.
 //No part of this game shoud be copyed to post out
-//xiaochentimmy 2026/7/16/19:00
+//xiaochentimmy 2026/7/17/07:43
 //For WINDOWS
 #include <iostream>
 #include <algorithm>
