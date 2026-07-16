@@ -1,6 +1,6 @@
-//This is 校园生活 v0.3beta.This version does not support English,and the 睡觉 part was not complete.
+//This is 校园生活 v0.3.1beta.This version does not support English.
 //No part of this game shoud be copyed to post out
-//xiaochentimmy 2026/7/16/18:45
+//xiaochentimmy 2026/7/16/19:00
 //For WINDOWS
 #include <iostream>
 #include <algorithm>
@@ -76,6 +76,7 @@ void sleep_time ()
 	{
 		cout << "一晚无事\n按任意键继续...\n";
 		cin >> in;
+		enegry = 100;
 		return;
 	}
 	cout << "有人敲门\n是否回答？\n1.回答2.不回答";
@@ -119,7 +120,7 @@ void sleep_time ()
 		    	orkill = brain % 101;
 		    	cout << "选择动作：\n1.普通攻击（伤害为" << orkill << "）\n";
 		    	cout << "2.魔法攻击（消耗1点魔法值，伤害为" << orkill + 50 << "）\n";
-		    	cout << "3.闪避（躲避下一个来自魔鬼的攻击）\n";
+		    	cout << "3.闪避（躲避下一个来自魔鬼的攻击, 如果还有魔法值，则能反弹伤害）\n";
 		    	cin >> in;
 		    	if (in == 1)
 		    	{
@@ -147,7 +148,15 @@ void sleep_time ()
 				cout << "魔鬼攻击了你...";
 				srand(time(0));
 				r = rand() % 10;
-				if (in == 3 || r == 4) cout << "你躲避了攻击！";
+				if (in == 3 || r == 4)
+				{
+					cout << "你躲避了攻击！";
+					if (magic > 0)
+					{
+						cout << "你反弹了伤害";
+						monster_blood -= kill;
+					}
+				}
 				else
 				{
 					my_blood -= kill;
@@ -159,6 +168,13 @@ void sleep_time ()
 				{
 					cout << "你死了！";
 					exit(0);
+				}
+				if (monster_blood <= 0)
+				{
+					cout << "你获胜了！你获得了10金币\n按任意键继续...";
+					coin += 10;
+					cin >> in;
+					break; 
 				}
 				system("cls");
 			}
