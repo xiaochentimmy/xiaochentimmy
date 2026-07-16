@@ -1,6 +1,6 @@
-//This is 校园生活 v0.2beta.This version does not support English,and the 睡觉 part was not complete.
+//This is 校园生活 v0.3beta.This version does not support English,and the 睡觉 part was not complete.
 //No part of this game shoud be copyed to post out
-//xiaochentimmy 2026/7/19/18:02
+//xiaochentimmy 2026/7/16/18:45
 //For WINDOWS
 #include <iostream>
 #include <algorithm>
@@ -65,6 +65,107 @@ void check ()
     if (enegry > 100) enegry = 100;
     return;
 }
+void sleep_time ()
+{
+	system("cls");
+	cout << "正在睡觉...\n按任意键继续...\n";
+	cin >> in;
+	srand(time(0));
+	r = rand() % 3;
+	if (r == 0)
+	{
+		cout << "一晚无事\n按任意键继续...\n";
+		cin >> in;
+		return;
+	}
+	cout << "有人敲门\n是否回答？\n1.回答2.不回答";
+	cin >> in;
+	if (r == 1)
+	{
+		if (in == 1) cout << "打开了房门...";
+		cout << "宿管来了：“好好睡觉吧！”\n按任意键继续...";
+		cin >> in;
+		enegry = 100;
+		return; 
+	}
+	else if (r == 2)
+	{
+		if (in == 2)
+		{
+			cout << "没有人进来\n按任意键继续...";
+			cin >> in;
+			enegry = 100;
+			return;
+		}
+		else
+		{
+			cout << "打开了房门...糟了，魔鬼来了！\n按任意键继续...\n";
+			cin >> in;
+			system("cls");
+			cout << "加载中...";
+			srand(time(0));
+		    r = rand() % 5 + 10;
+		    Sleep(r * 1000);
+		    cout << "交战时间到！\n";
+		    srand(time(0));
+		    r = rand() % 500 + 100;
+		    long long my_blood = 100, monster_blood = r, kill, orkill;
+			srand(time(0));
+			kill = rand() % 10 + 10;
+		    while (1)
+		    {
+		    	printf("己方血量：%lld 智力值：%lld 魔法值：%lld\n", my_blood, brain, magic);
+		    	printf("对方血量：%lld 对方伤害：%lld\n", monster_blood, kill);
+		    	orkill = brain % 101;
+		    	cout << "选择动作：\n1.普通攻击（伤害为" << orkill << "）\n";
+		    	cout << "2.魔法攻击（消耗1点魔法值，伤害为" << orkill + 50 << "）\n";
+		    	cout << "3.闪避（躲避下一个来自魔鬼的攻击）\n";
+		    	cin >> in;
+		    	if (in == 1)
+		    	{
+		    		monster_blood -= orkill;
+		    		cout << "\n攻击完成\n";
+				}
+				else if (in == 2)
+				{
+					if (magic == 0) cout << "无法执行此攻击，已视为放弃攻击\n";
+					else
+					{
+						monster_blood -= orkill + 50;
+						magic--;
+						cout << "\n攻击完成\n";
+					}
+				}
+				else if (in == 3) cout << "\n准备躲避\n";
+				if (monster_blood <= 0)
+				{
+					cout << "你获胜了！你获得了10金币\n按任意键继续...";
+					coin += 10;
+					cin >> in;
+					break; 
+				}
+				cout << "魔鬼攻击了你...";
+				srand(time(0));
+				r = rand() % 10;
+				if (in == 3 || r == 4) cout << "你躲避了攻击！";
+				else
+				{
+					my_blood -= kill;
+					cout << "你受到了攻击！";
+				}
+				cout << "\n按任意键继续...";
+				cin >> in;
+				if (my_blood <= 0)
+				{
+					cout << "你死了！";
+					exit(0);
+				}
+				system("cls");
+			}
+		}
+	}
+	return;
+}
 void menu ()
 {
     cout << "InDev_WarningUnstable\n";
@@ -93,6 +194,7 @@ void menu ()
         eat();
         check();
     }
+    else if (in == 3) sleep_time();
 	system("cls");
     return;
 }
@@ -105,6 +207,11 @@ int main ()
     cin >> in;
     system("cls");
     if (in == 2) return 0;
+    cout << "加载中...";
+    srand(time(0));
+    r = rand() % 20 + 10;
+    Sleep(r * 1000);
+    system("cls");
     while (1)
     {
         menu();
