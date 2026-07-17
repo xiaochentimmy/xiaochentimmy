@@ -25,28 +25,28 @@ void have_class ()
     enegry -= 5;
     if (r == 1)
     {
-        cout << "Chinese Class£¬gain 10 Intelligence£¬consume 5 Energy\nPress any key to continue...";
+        cout << "Chinese Classï¼Œgain 10 Intelligenceï¼Œconsume 5 Energy\nPress any key to continue...";
         brain += 10;
         cin >> in;
         return;
     }
     else if (r == 2)
     {
-        cout << "Math Class£¬gain 10 Intelligence£¬consume 5 Energy\nPress any key to continue...";
+        cout << "Math Classï¼Œgain 10 Intelligenceï¼Œconsume 5 Energy\nPress any key to continue...";
         brain += 10;
         cin >> in;
         return;
     }
     else if (r == 3)
     {
-        cout << "English class£¬gain 5 Intelligence£¬consums 5 Energy\nPress any key to continue...";
+        cout << "English classï¼Œgain 5 Intelligenceï¼Œconsums 5 Energy\nPress any key to continue...";
         brain += 5;
         cin >> in;
         return;
     }
     else if (r == 4)
     {
-        cout << "Science Class£¬gain 1 Magic Point£¬consume 5 Energy\nPress any key to continue...";
+        cout << "Science Classï¼Œgain 1 Magic Pointï¼Œconsume 5 Energy\nPress any key to continue...";
         magic++;
         cin >> in;
         return;
@@ -79,12 +79,12 @@ void sleep_time ()
 		enegry = 100;
 		return;
 	}
-	cout << "Someone knocks at your door\nWill you answer£¿\n1.Answer2.Ignore";
+	cout << "Someone knocks at your door\nWill you answerï¼Ÿ\n1.Answer2.Ignore";
 	cin >> in;
 	if (r == 1)
 	{
 		if (in == 1) cout << "Opened the door...";
-		cout << "Dorm Manager says£º¡°Sleep well£¡¡±\nPress any key to continue...";
+		cout << "Dorm Manager saysï¼šâ€œSleep wellï¼â€\nPress any key to continue...";
 		cin >> in;
 		enegry = 100;
 		return; 
@@ -100,14 +100,14 @@ void sleep_time ()
 		}
 		else
 		{
-			cout << "You opened the door... Uh-oh£¬a Demon appeared£¡\nPress any key to continue...\n";
+			cout << "You opened the door... Uh-ohï¼Œa Demon appearedï¼\nPress any key to continue...\n";
 			cin >> in;
 			system("cls");
 			cout << "Loading...";
 			srand(time(0));
 		    r = rand() % 5 + 10;
 		    Sleep(r * 1000);
-		    cout << "Battle Start£¡\n";
+		    cout << "Battle Startï¼\n";
 		    srand(time(0));
 		    r = rand() % 500 + 100;
 		    long long my_blood = 100, monster_blood = r, kill, orkill;
@@ -115,12 +115,12 @@ void sleep_time ()
 			kill = rand() % 10 + 10;
 		    while (1)
 		    {
-		    	printf("Your HP£º%lld Intelligence£º%lld Magic£º%lld\n", my_blood, brain, magic);
-		    	printf("Demon HP£º%lld Demon Attack£º%lld\n", monster_blood, kill);
+		    	printf("Your HPï¼š%lld Intelligenceï¼š%lld Magicï¼š%lld\n", my_blood, brain, magic);
+		    	printf("Demon HPï¼š%lld Demon Attackï¼š%lld\n", monster_blood, kill);
 		    	orkill = brain % 101;
-		    	cout << "Choose your action£º\n1.Normal Attack£¨Damage£º" << orkill << "£©\n";
-		    	cout << "2.Magic Strike£¨Cost 1 Magic, Damage£º" << orkill + 50 << "£©\n";
-		    	cout << "3.Dodge£¨Evade next demon attack; reflect damage if you have Magic left£©\n";
+		    	cout << "Choose your actionï¼š\n1.Normal Attackï¼ˆDamageï¼š" << orkill << "ï¼‰\n";
+		    	cout << "2.Magic Strikeï¼ˆCost 1 Magic, Damageï¼š" << orkill + 50 << "ï¼‰\n";
+		    	cout << "3.Dodgeï¼ˆEvade next demon attack; reflect damage if you have Magic leftï¼‰\n";
 		    	cin >> in;
 		    	if (in == 1)
 		    	{
@@ -140,7 +140,7 @@ void sleep_time ()
 				else if (in == 3) cout << "\nYou prepare to dodge\n";
 				if (monster_blood <= 0)
 				{
-					cout << "Victory£¡You gain 10 Coins\\nPress any key to continue...";
+					cout << "Victoryï¼You gain 10 Coins\\nPress any key to continue...";
 					coin += 10;
 					cin >> in;
 					break; 
@@ -150,7 +150,7 @@ void sleep_time ()
 				r = rand() % 10;
 				if (in == 3 || r == 4)
 				{
-					cout << "You dodged the hit£¡";
+					cout << "You dodged the hitï¼";
 					if (magic > 0)
 					{
 						cout << "You reflected damage back to the demon";
@@ -160,13 +160,13 @@ void sleep_time ()
 				else
 				{
 					my_blood -= kill;
-					cout << "You took damage£¡";
+					cout << "You took damageï¼";
 				}
 				cout << "\nPress any key to continue...";
 				cin >> in;
 				if (my_blood <= 0)
 				{
-					cout << "You died£¡";
+					cout << "You diedï¼";
 					exit(0);
 				}
 				if (monster_blood <= 0)
@@ -185,8 +185,8 @@ void sleep_time ()
 void menu ()
 {
     cout << "InDev_WarningUnstable\n";
-    printf("Energy%lld Intelligence%lld Magic%lld Coins%lld\n", enegry, brain, magic, coin);
-    cout << "1.Attend class£¨Consumes 5 Energy£©\n2.Eat meal£¨Restore 10 Energy, Costs 5 Coins£©\n3.Slee£¨Full Energy Restor£©\n";
+    printf("Energyï¼š%lld Intelligenceï¼š%lld Magicï¼š%lld Coinsï¼š%lld\n", enegry, brain, magic, coin);
+    cout << "1.Attend classï¼ˆConsumes 5 Energyï¼‰\n2.Eat mealï¼ˆRestore 10 Energy, Costs 5 Coinsï¼‰\n3.Sleepï¼ˆFull Energy Restorï¼‰\n";
     cin >> in;
     if (in == 4) return;
     if (in == 1)
@@ -203,7 +203,7 @@ void menu ()
     {
         if (coin < 5)
         {
-            cout << "You don't have enough coins to dat\nPress any key to continue...";
+            cout << "You don't have enough coins to eat\nPress any key to continue...";
             cin >> in;
             return;
         }
