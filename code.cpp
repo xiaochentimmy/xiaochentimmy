@@ -1,6 +1,6 @@
-//This is Campus Life v0.3.2beta.I add the English translate.If you found any grammer error(my grammer is bad),please tell me.
+//This is Campus Life v0.3.2.1beta.This version doesn't have English translation.
 //No part of this game shoud be copyed to post out
-//xiaochentimmy 2026/7/17/07:43
+//xiaochentimmy 2026/7/17/15:34
 //For WINDOWS
 #include <iostream>
 #include <algorithm>
@@ -10,7 +10,8 @@
 #include <time.h>
 #include <windows.h>
 using namespace std;
-long long in, enegry = 100, brain, magic, r, coin = 5;
+long long in, enegry = 100, brain, magic, r, coin = 5, tr;
+double happy;
 void have_class ()
 {
     cout << "InDev_WarningUnstable\n";
@@ -23,10 +24,14 @@ void have_class ()
         return;
     }
     enegry -= 5;
+    happy -= 0.1;
     if (r == 1)
     {
         cout << "语文课，获得智力值10点，消耗体力5点\n按任意键继续...";
         brain += 10;
+        tr = happy / 0.1;
+        tr %= 2;
+        brain += tr;
         cin >> in;
         return;
     }
@@ -34,6 +39,9 @@ void have_class ()
     {
         cout << "数学课，获得智力值10点，消耗体力5点\n按任意键继续...";
         brain += 10;
+        tr = happy / 0.1;
+        tr %= 2;
+        brain += tr;
         cin >> in;
         return;
     }
@@ -41,6 +49,9 @@ void have_class ()
     {
         cout << "英语课，获得智力值5点，消耗体力5点\n按任意键继续...";
         brain += 5;
+        tr = happy / 0.1;
+        tr %= 2;
+        brain += tr;
         cin >> in;
         return;
     }
@@ -108,19 +119,22 @@ void sleep_time ()
 		    r = rand() % 5 + 10;
 		    Sleep(r * 1000);
 		    cout << "交战时间到！\n";
-		    srand(time(0));
-		    r = rand() % 500 + 100;
-		    long long my_blood = 100, monster_blood = r, kill, orkill;
+		    long long my_blood = 100, monster_blood = 0, kill, orkill;
 			srand(time(0));
-			kill = rand() % 10 + 10;
+			kill = rand() % 30 + 10;
+			tr = happy / 0.1;
+			my_blood += tr * 10;
+			srand(time(0));
+		    r = rand() % 500 + my_blood;
+		    monster_blood = r;
 		    while (1)
 		    {
 		    	printf("己方血量：%lld 智力值：%lld 魔法值：%lld\n", my_blood, brain, magic);
 		    	printf("对方血量：%lld 对方伤害：%lld\n", monster_blood, kill);
-		    	orkill = brain % 101;
+		    	orkill = brain % 101 + 20;
 		    	cout << "选择动作：\n1.普通攻击（伤害为" << orkill << "）\n";
 		    	cout << "2.魔法攻击（消耗1点魔法值，伤害为" << orkill + 50 << "）\n";
-		    	cout << "3.闪避（躲避下一个来自魔鬼的攻击, 如果还有魔法值，则能反弹伤害）\n";
+		    	cout << "3.闪避（躲避下一个来自魔鬼的攻击, 有50%给予魔鬼一次普通攻击）\n";
 		    	cin >> in;
 		    	if (in == 1)
 		    	{
@@ -142,6 +156,7 @@ void sleep_time ()
 				{
 					cout << "你获胜了！你获得了10金币\n按任意键继续...";
 					coin += 10;
+					happy += 0.05;
 					cin >> in;
 					break; 
 				}
@@ -151,10 +166,12 @@ void sleep_time ()
 				if (in == 3 || r == 4)
 				{
 					cout << "你躲避了攻击！";
-					if (magic > 0)
+					srand(time(0));
+					r = rand() % 10;
+					if (r == 3 || r == 0 || r == 5 || r == 7 || r == 6)
 					{
-						cout << "你反弹了伤害";
-						monster_blood -= kill;
+						cout << "你攻击了对方！\n";
+						monster_blood -= orkill;
 					}
 				}
 				else
@@ -173,6 +190,7 @@ void sleep_time ()
 				{
 					cout << "你获胜了！你获得了10金币\n按任意键继续...";
 					coin += 10;
+					happy += 0.05;
 					cin >> in;
 					break; 
 				}
@@ -182,13 +200,76 @@ void sleep_time ()
 	}
 	return;
 }
+void sell ()
+{
+	system("cls");
+	cout << "小卖部\n1.*乐：3金币\n2.*碧：4金币\n3.芬*：5金币\n4.佳得*：10金币（回10点能量）\n";
+	cin >> in;
+	if (in == 1)
+	{
+		if (coin < 3)
+		{
+			cout << "不够钱\n按任意键继续...";
+			cin >> in;
+			return;
+		}
+		happy += 0.15;
+		coin -= 3;
+		cout << "喝了一瓶*乐\n按任意键继续...";
+		cin  >> in;
+		return;
+	}
+	else if (in == 2)
+	{
+		if (coin < 4)
+		{
+			cout << "不够钱\n按任意键继续...";
+			cin >> in;
+			return;
+		}
+		happy += 0.2;
+		coin -= 4;
+		cout << "喝了一瓶*n碧\n按任意键继续...";
+		cin  >> in;
+		return;
+	}
+	else if (in == 3)
+	{
+		if (coin < 5)
+		{
+			cout << "不够钱\n按任意键继续...";
+			cin >> in;
+			return;
+		}
+		coin -= 5;
+		happy += 0.35;
+		cout << "喝了一瓶芬*\n按任意键继续...";
+		cin  >> in;
+		return;
+	}
+	else if (in == 4)
+	{
+		if (coin < 10)
+		{
+			cout << "不够钱\n按任意键继续...";
+			cin >> in;
+			return;
+		}
+		coin -= 10;
+		happy += 0.2;
+		enegry += 10;
+		check();
+		cout << "喝了一瓶佳得*\n按任意键继续...";
+		cin >> in;
+		return;
+	}
+}
 void menu ()
 {
     cout << "InDev_WarningUnstable\n";
     printf("体力%lld 智力%lld 魔力%lld 金币%lld\n", enegry, brain, magic, coin);
-    cout << "1.上课（消耗5点体力）\n2.吃饭（补充10点体力，消耗5金币）\n3.睡觉（回满体力）\n";
+    cout << "1.上课（消耗5点体力）\n2.吃饭（补充10点体力，消耗5金币）\n3.睡觉（回满体力）\n4.小卖部\n";
     cin >> in;
-    if (in == 4) return;
     if (in == 1)
     {
         if (enegry < 5)
@@ -211,6 +292,7 @@ void menu ()
         check();
     }
     else if (in == 3) sleep_time();
+    else if (in == 4) sell();
 	system("cls");
     return;
 }
