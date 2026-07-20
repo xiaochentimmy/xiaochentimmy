@@ -1,6 +1,7 @@
-//This is Campus Life v0.3.2.1beta.This version doesn't have English translation.
+//This is Campus Life v0.3.3beta.This version doesn't have English translation.
+//P.S:This game will stop updating form 2026/7/20 to 2026/8/1
 //No part of this game shoud be copyed to post out
-//xiaochentimmy 2026/7/17/15:34
+//xiaochentimmy 2026/7/20/9:55
 //For WINDOWS
 #include <iostream>
 #include <algorithm>
@@ -12,6 +13,7 @@
 using namespace std;
 long long in, enegry = 100, brain, magic, r, coin = 5, tr;
 double happy;
+bool weapon[100];
 void have_class ()
 {
     cout << "InDev_WarningUnstable\n";
@@ -121,11 +123,10 @@ void sleep_time ()
 		    cout << "交战时间到！\n";
 		    long long my_blood = 100, monster_blood = 0, kill, orkill;
 			srand(time(0));
-			kill = rand() % 30 + 10;
-			tr = happy / 0.1;
-			my_blood += tr * 10;
+			kill = rand() % 5 + 3;
 			srand(time(0));
-		    r = rand() % 500 + my_blood;
+		    	orkill = brain % 101 + 20;
+		    r = rand() % (orkill * 2) + orkill * 10;
 		    monster_blood = r;
 		    while (1)
 		    {
@@ -134,7 +135,10 @@ void sleep_time ()
 		    	orkill = brain % 101 + 20;
 		    	cout << "选择动作：\n1.普通攻击（伤害为" << orkill << "）\n";
 		    	cout << "2.魔法攻击（消耗1点魔法值，伤害为" << orkill + 50 << "）\n";
-		    	cout << "3.闪避（躲避下一个来自魔鬼的攻击, 有50%给予魔鬼一次普通攻击）\n";
+		    	cout << "3.闪避（躲避下一个来自魔鬼的攻击, 有概率给予魔鬼一次普通攻击）\n";
+		    	if (weapon[1] == true) cout << "4.使用衣架攻击（伤害为" << orkill + 5 << "）\n";
+		    	if (weapon[2] == true) cout << "5.使用故事书攻击（伤害为" << orkill + 10 << "）\n";
+		    	if (weapon[3] == true) cout << "6.使用萝卜刀攻击（伤害为" << orkill + 20 << "）\n";
 		    	cin >> in;
 		    	if (in == 1)
 		    	{
@@ -152,6 +156,33 @@ void sleep_time ()
 					}
 				}
 				else if (in == 3) cout << "\n准备躲避\n";
+				else if (in == 4)
+				{
+					if (weapon[1] != true) cout << "无法执行此攻击，已视为放弃攻击\n";
+					else
+					{
+						monster_blood -= orkill + 5;
+						cout << "\n攻击完成\n" ;
+					}
+				}
+				else if (in == 5)
+				{
+					if (weapon[2] != true) cout << "无法执行此攻击，已视为放弃攻击\n";
+					else
+					{
+						monster_blood -= orkill + 10;
+						cout << "\n攻击完成\n" ;
+					}
+				}
+				else if (in == 6)
+				{
+					if (weapon[1] != true) cout << "无法执行此攻击，已视为放弃攻击\n";
+					else
+					{
+						monster_blood -= orkill + 20;
+						cout << "\n攻击完成\n" ;
+					}
+				}
 				if (monster_blood <= 0)
 				{
 					cout << "你获胜了！你获得了10金币\n按任意键继续...";
@@ -167,7 +198,8 @@ void sleep_time ()
 				{
 					cout << "你躲避了攻击！";
 					srand(time(0));
-					r = rand() % 10;
+					if (happy > 0) r = rand() % 5 + 4;
+					else r = rand() % 10;
 					if (r == 3 || r == 0 || r == 5 || r == 7 || r == 6)
 					{
 						cout << "你攻击了对方！\n";
@@ -203,7 +235,8 @@ void sleep_time ()
 void sell ()
 {
 	system("cls");
-	cout << "小卖部\n1.*乐：3金币\n2.*碧：4金币\n3.芬*：5金币\n4.佳得*：10金币（回10点能量）\n";
+	cout << "小卖部：\n1.*乐（让你变得更快乐）：3金币\n2.*碧（让你变得更快乐）：4金币\n3.芬*（让你变得更快乐）：5金币\n4.佳得*（让你变得更快乐）：10金币（回10点能量）\n5.衣架（增加5点伤害）：20金币\n6.一本很厚的故事书";
+	cout << "（让你变得更快乐，还能增加10点伤害）：40金币\n7.萝卜刀（让你变得更快乐，还能增加20点伤害）：50金币\n8.离开";
 	cin >> in;
 	if (in == 1)
 	{
@@ -263,6 +296,54 @@ void sell ()
 		cin >> in;
 		return;
 	}
+	else if (in == 5)
+	{
+		if (coin < 20)
+		{
+			cout << "不够钱\n按任意键继续...";
+			cin >> in;
+			return;
+		}
+		coin -= 20;
+		weapon[1] = true;
+		check();
+		cout << "购买了一个衣架\n按任意键继续...";
+		cin >> in;
+		return;
+	}
+	else if (in == 6)
+	{
+		if (coin < 40)
+		{
+			cout << "不够钱\n按任意键继续...";
+			cin >> in;
+			return;
+		}
+		coin -= 40;
+		weapon[2] = true;
+		happy += 0.4;
+		check();
+		cout << "购买了一本很厚的故事书\n按任意键继续...";
+		cin >> in;
+		return;
+	}
+	else if (in == 7)
+	{
+		if (coin < 50)
+		{
+			cout << "不够钱\n按任意键继续...";
+			cin >> in;
+			return;
+		}
+		coin -= 50;
+		happy += 0.5;
+		weapon[3] = true;
+		check();
+		cout << "购买了一个萝卜刀\n按任意键继续...";
+		cin >> in;
+		return;
+	}
+	else if (in == 8) return;
 }
 void menu ()
 {
@@ -298,7 +379,8 @@ void menu ()
 }
 int main ()
 {
-    cout << "更多游戏，前往GitHub搜索xiaochentimmy\n按任意键继续...";
+    for (int i = 1; i < 100; i++) weapon[i] = false;
+	cout << "更多游戏，前往xiaochentimmy.github.io\n按任意键继续...";
     cin >> in;
     system("cls");
     cout << "InDev_WarningUnstable\n校园生活\n1.进入游戏\n2.退出\n";
